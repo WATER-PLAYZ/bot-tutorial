@@ -2,12 +2,6 @@ const Discord = require('discord.js');
 
 const cilent = new Discord.Client();
 
-const got = require('got');
-
- 
-
-const prefix = "ahe";
-
 const Fs = require("fs")
 const express = require('express')
 const http = require('http')
