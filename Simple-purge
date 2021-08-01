@@ -1,0 +1,41 @@
+cilent.on('message', message => {
+	if (message.content.startsWith(`${prefix}purge`)){
+		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
+			toSend = new Discord.MessageEmbed()
+			.setColor("RANDOM")
+			.setDescription(`hm, looks like your dont have perms to use the command. Make sure you have MANAGE_MESSAGES permission!`)
+			message.channel.send({
+				embed: toSend,
+			})
+
+		} else {
+
+			const args = message.content.split(' ').slice(2); // All arguments behind the command name with the prefix
+			const amount = args.join(' '); // Amount of messages which should be deleted
+
+			if (amount < 1) {
+				toSend = new Discord.MessageEmbed()
+				.setColor("RANDOM")
+				.setDescription(`commmon man, pls delete at least 1 message -__-`)
+				message.channel.send({
+					embed: toSend,
+				})
+			}
+			to_delete = amount
+			while (to_delete > 0) {
+				if(to_delete > 99){
+					message.channel.bulkDelete(100)
+					to_delete -= 100
+				}else{
+					message.channel.bulkDelete(to_delete)
+					to_delete -= to_delete
+  		}
+				console.log(`${to_delete} to delete ok?`)
+			}
+		}
+
+
+		return false
+  }
+}
+)
